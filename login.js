@@ -15,10 +15,7 @@ document.getElementById("error");
 
 error.innerText="";
 
-if(
-adminId==="" ||
-password===""
-){
+if(adminId==="" || password===""){
 
 error.innerText=
 "Please enter Admin ID and Password";
@@ -45,9 +42,7 @@ error.innerText=
 }
 
 
-// ================================
-// ENTER KEY LOGIN
-// ================================
+// ENTER KEY
 
 document.addEventListener(
 "keypress",
@@ -63,9 +58,7 @@ login();
 );
 
 
-// ================================
 // FORGOT PASSWORD
-// ================================
 
 function forgotPassword(){
 
