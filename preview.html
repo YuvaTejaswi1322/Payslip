@@ -1,0 +1,387 @@
+8 {% if success %}
+<script>
+alert("{{ success }}");
+</script>
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Payslip Preview</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+    background:#f5f5f5;
+    font-family:Arial,sans-serif;
+}
+
+.container-box{
+    background:white;
+    width:85%;
+    margin:30px auto;
+    padding:35px;
+    border-radius:10px;
+    box-shadow:0px 0px 10px gray;
+}
+
+.header{
+    display:flex;
+    align-items:center;
+    border-bottom:2px solid black;
+    padding-bottom:15px;
+}
+
+.logo{
+    width:90px;
+    margin-right:20px;
+}
+
+.company{
+    flex:1;
+    text-align:center;
+}
+
+.section-title{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:25px;
+    border-bottom:1px solid gray;
+}
+
+.info-table,
+.salary-table{
+    width:100%;
+    margin-top:15px;
+}
+
+.info-table td{
+    padding:8px;
+}
+
+.salary-table{
+    border-collapse:collapse;
+}
+
+.salary-table th{
+    background:#0d6efd;
+    color:white;
+    padding:10px;
+}
+
+.salary-table td{
+    border:1px solid lightgray;
+    padding:10px;
+}
+
+.net-box{
+    background:#d4edda;
+    padding:15px;
+    text-align:center;
+    margin-top:20px;
+    border-radius:8px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.btns{
+    text-align:center;
+    margin-top:30px;
+}
+
+
+@media print{
+
+.no-print{
+display:none;
+}
+
+}
+
+@media print{
+
+body{
+zoom:75%;
+margin:0;
+padding:0;
+}
+
+.container-box{
+width:100%;
+margin:0;
+padding:10px;
+box-shadow:none;
+border:none;
+}
+
+.section-title{
+margin-top:10px;
+font-size:16px;
+}
+
+.info-table td,
+.salary-table td,
+.salary-table th{
+padding:4px;
+font-size:12px;
+}
+
+.net-box{
+font-size:18px;
+padding:8px;
+margin-top:10px;
+}
+
+.btns{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container-box">
+
+<div class="header">
+
+<img src="{{ url_for('static', filename='logo.png') }}"
+class="logo">
+
+<div class="company">
+
+<h2>NR SOFTECH(I) PVT LTD</h2>
+
+<h4>SALARY SLIP</h4>
+
+</div>
+
+</div>
+
+
+<div class="section-title">
+Employee Information
+</div>
+
+<table class="info-table">
+
+<tr>
+<td><b>Name :</b> {{form.name}}</td>
+<td><b>PERS No :</b> {{form.pers_no}}</td>
+</tr>
+
+<tr>
+<td><b>Designation :</b> {{form.designation}}</td>
+<td><b>Department :</b> {{form.department}}</td>
+</tr>
+
+<tr>
+<td><b>PAN :</b> {{form.pan}}</td>
+<td><b>DOJ :</b> {{form.doj}}</td>
+</tr>
+
+<tr>
+<td><b>PF No :</b> {{form.pf_no}}</td>
+<td><b>UAN No :</b> {{form.uan_no}}</td>
+</tr>
+
+<tr>
+<td><b>Pay Period :</b> {{form.pay_period}}</td>
+<td><b>Paid Days :</b> {{form.paid_days}}</td>
+
+</tr>
+
+<tr>
+<td><b>Leaves :</b> {{form.leaves}}</td>
+<td><b>ACTUAL BASIC PAY :</b> {{form.actual_basic_pay}}</td>
+</tr>
+</table>
+
+
+<div class="section-title">
+Earnings
+</div>
+
+<table class="salary-table">
+
+<tr>
+<th>Particular</th>
+<th>Current Amount</th>
+<th>YTD</th>
+</tr>
+
+<tr>
+<td>Basic Pay</td>
+<td>{{form.basic}}</td>
+<td>{{form.basic_ytd}}</td>
+</tr>
+
+<tr>
+<td>HRA</td>
+<td>{{form.hra}}</td>
+<td>{{form.hra_ytd}}</td>
+</tr>
+
+<tr>
+<td>Meal Coupon</td>
+<td>{{form.meal}}</td>
+<td>{{form.meal_ytd}}</td>
+</tr>
+
+<tr>
+<td>Transport</td>
+<td>{{form.transport}}</td>
+<td>{{form.transport_ytd}}</td>
+</tr>
+
+<tr>
+<td><b>Total Earnings</b></td>
+<td><b>{{form.total_earnings}}</b></td>
+<td><b>{{form.total_earnings_ytd}}</b></td>
+</tr>
+
+</table>
+
+
+<div class="section-title">
+Tax Details
+</div>
+
+<table class="salary-table">
+
+<tr>
+<th>Particular</th>
+<th>Current Amount</th>
+<th>YTD</th>
+</tr>
+
+<tr>
+<td>Income Tax</td>
+<td>{{form.income_tax}}</td>
+<td>{{form.income_tax_ytd}}</td>
+</tr>
+
+<tr>
+<td><b>Total Tax</b></td>
+<td><b>{{form.total_tax}}</b></td>
+<td><b>{{form.total_tax_ytd}}</b></td>
+</tr>
+
+</table>
+
+
+<div class="section-title">
+Deductions
+</div>
+
+<table class="salary-table">
+
+<tr>
+<th>Particular</th>
+<th>Current Amount</th>
+<th>YTD</th>
+</tr>
+
+<tr>
+<td>PF</td>
+<td>{{form.pf}}</td>
+<td>{{form.pf_ytd}}</td>
+</tr>
+
+<tr>
+<td>Professional Tax</td>
+<td>{{form.prof_tax}}</td>
+<td>{{form.prof_ytd}}</td>
+</tr>
+
+<tr>
+<td>Insurance</td>
+<td>{{form.insurance}}</td>
+<td>{{form.insurance_ytd}}</td>
+</tr>
+
+<tr>
+<td>Sodexo</td>
+<td>{{form.sodexo}}</td>
+<td>{{form.sodexo_ytd}}</td>
+</tr>
+
+<tr>
+<td><b>Total Deductions</b></td>
+<td><b>{{form.total_deductions}}</b></td>
+<td><b>{{form.total_deductions_ytd}}</b></td>
+</tr>
+
+</table>
+
+
+<div class="net-box">
+
+NET PAY : ₹ {{form.net_pay}}
+
+</div>
+
+
+<div class="section-title">
+
+Bank Details
+
+</div>
+
+<table class="info-table">
+
+<tr>
+<td><b>Bank :</b> {{form.bank}}</td>
+<td><b>Account No :</b> {{form.bank_account}}</td>
+</tr>
+
+</table>
+
+
+<form action="/final_generate" method="POST">
+
+{% for key,value in form.items() %}
+<input
+type="hidden"
+name="{{key}}"
+value="{{value}}">
+{% endfor %}
+
+<div class="btns no-print">
+
+<button
+type="button"
+onclick="window.print()"
+class="btn btn-success">
+
+Print
+
+</button>
+
+<button
+type="button"
+onclick="history.back()"
+class="btn btn-primary">
+
+Edit
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+body{
+background:#f4f6f9;
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+}
+
+
+/* Header */
+
+.header-box{
+display:flex;
+align-items:center;
+gap:20px;
+background:white;
+padding:20px;
+border-radius:15px;
+margin-bottom:20px;
+box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.logo{
+height:90px;
+width:auto;
+}
+
+.heading{
+flex:1;
+text-align:center;
+}
+
+.company-name{
+font-size:30px;
+font-weight:bold;
+margin:0;
+}
+
+.payslip-title{
+font-size:22px;
+font-weight:bold;
+color:#0d6efd;
+margin-top:5px;
+}
+
+
+/* Search */
+
+.search-box{
+margin-bottom:20px;
+}
+
+.search-box input{
+height:45px;
+border-radius:10px;
+}
+
+
+/* Card */
+
+.card{
+border:none;
+border-radius:15px;
+padding:20px;
+background:white;
+box-shadow:0 2px 15px rgba(0,0,0,.1);
+}
+
+
+/* Labels */
+
+label{
+font-weight:600;
+margin-bottom:5px;
+}
+
+
+/* Inputs */
+
+.form-control{
+height:42px;
+border-radius:10px;
+}
+
+.form-select{
+height:42px;
+border-radius:10px;
+}
+
+
+/* Headings */
+
+.blue-heading{
+color:#0d6efd;
+font-weight:bold;
+margin-top:15px;
+margin-bottom:15px;
+}
+
+
+/* Tables */
+
+.table{
+margin-bottom:25px;
+}
+
+.table th{
+background:#0d6efd;
+color:white;
+text-align:center;
+vertical-align:middle;
+}
+
+.table td{
+vertical-align:middle;
+text-align:center;
+}
+
+.table td:first-child{
+text-align:left;
+font-weight:500;
+}
+
+
+/* Formula */
+
+.formula{
+font-size:18px;
+font-weight:bold;
+color:green;
+text-align:center;
+padding:15px;
+background:#f8f9fa;
+border-radius:10px;
+}
+
+
+/* Buttons */
+
+.btn-success{
+padding:10px 40px;
+border-radius:10px;
+font-weight:bold;
+}
+
+.btn-dark{
+padding:10px 40px;
+border-radius:10px;
+font-weight:bold;
+}
+
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.header-box{
+
+flex-direction:column;
+text-align:center;
+
+}
+
+.logo{
+
+height:70px;
+
+}
+
+.company-name{
+
+font-size:22px;
+
+}
+
+/* =========================
+   PDF / PRINT SETTINGS
+========================= */
+
+@media print {
+
+@page{
+    size:A4;
+    margin:5mm;
+}
+
+body{
+    zoom:70%;
+    background:white !important;
+}
+
+.container{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.card{
+    border:none !important;
+    box-shadow:none !important;
+    margin:0 !important;
+    padding:5px !important;
+}
+
+.table{
+    font-size:11px !important;
+}
+
+.table td,
+.table th{
+    padding:4px !important;
+}
+
+h2{
+    font-size:20px !important;
+}
+
+h4,h5{
+    font-size:15px !important;
+}
+
+input,
+select{
+    border:none !important;
+    background:white !important;
+    padding:2px !important;
+    font-size:11px !important;
+}
+
+button,
+.btn,
+.search-box,
+a[href="/history"]{
+    display:none !important;
+}
+
+hr{
+    margin:5px 0 !important;
+}
+
+}
+
+}

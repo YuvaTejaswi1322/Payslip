@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>NR Payslip Generator</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f4f6f9;
+font-family:Arial,sans-serif;
+}
+
+.header-box{
+display:flex;
+align-items:center;
+gap:20px;
+margin-bottom:20px;
+}
+
+.logo{
+height:90px;
+}
+
+.heading{
+flex:1;
+text-align:center;
+}
+
+.company-name{
+font-weight:bold;
+}
+
+.payslip-title{
+color:#0d6efd;
+font-weight:bold;
+}
+
+.blue-heading{
+color:#0d6efd;
+font-weight:bold;
+}
+
+.card{
+border-radius:15px;
+}
+
+.table th{
+background:#0d6efd;
+color:white;
+text-align:center;
+vertical-align:middle;
+}
+
+.table td{
+text-align:center;
+vertical-align:middle;
+}
+
+.table td:first-child{
+text-align:left;
+}
+
+.formula{
+font-size:18px;
+font-weight:bold;
+color:green;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container mt-4">
+
+<!-- HEADER -->
+
+<div class="header-box">
+
+<img src="static/logo.png" class="logo">
+
+<div class="heading">
+
+<h2 class="company-name">
+NR SOFTECH(I) PVT LTD
+</h2>
+
+<h4 id="payslip_heading">
+
+    PAYSLIP
+</h4>
+
+</div>
+
+</div>
+
+
+<div class="search-box mb-4">
+
+<form action="/search" method="GET">
+
+<div class="input-group">
+
+<input
+type="text"
+name="q"
+class="form-control"
+placeholder="Search Employee Name / Employee No">
+
+<button
+class="btn btn-primary"
+type="submit">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+
+<form action="/preview" method="POST">
+
+<div class="card shadow p-4">
+
+
+<!-- EMPLOYEE DETAILS -->
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Name</label>
+
+<input
+type="text"
+id="name"
+name="name"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-6">
+
+<label>PERS No</label>
+
+<input
+type="text"
+id="pers_no"
+name="pers_no"
+class="form-control"
+required>
+
+</div>
+
+</div>
+
+
+
+<div class="row mt-3">
+
+<div class="col-md-6">
+
+<label>Designation</label>
+
+<input
+type="text"
+id="designation"
+name="designation"
+class="form-control"
+required>
+
+</div>
+
+<div class="col-md-6">
+
+<label>PAN</label>
+
+<input
+type="text"
+id="pan"
+name="pan"
+maxlength="10"
+placeholder="ABCDE1234F"
+class="form-control"
+required>
+
+</div>
+
+</div>
+
+
+
+<div class="row mt-3">
+
+<div class="col-md-6">
+
+<label>Department</label>
+
+<input
+type="text"
+id="department"
+name="department"
+class="form-control"
+required>
+</div>
+
+<div class="col-md-6">
+
+<label>DOJ</label>
+
+<input
+type="date"
+id="doj"
+name="doj"
+class="form-control">
+
+</div>
+
+</div>
+
+<!-- PAY PERIOD -->
+<div class="row mt-3">
+
+    <!-- Start Date -->
+    <div class="col-md-3">
+        <label>Pay Period Start</label>
+        <input type="date" id="pay_start" name="pay_start">
+    </div>
+
+    <!-- End Date -->
+    <div class="col-md-3">
+        <label>Pay Period End</label>
+        <input type="date" id="pay_end" name="pay_end">
+    </div>
+
+    <!-- Leaves -->
+    <div class="col-md-3">
+        <label>Leaves</label>
+        <input
+            type="number"
+            id="leaves"
+            name="leaves"
+            class="form-control"
+            value="0"
+            min="0"
+            step="0.5">
+    </div>
+
+    <!-- Paid Days -->
+    <div class="col-md-3">
+        <label>Paid Days</label>
+        <input
+            type="text"
+            id="paid_days"
+            name="paid_days"
+            class="form-control"
+            readonly>
+    </div>
+
+</div>
+<!-- PF NO + UAN NO + ACTUAL BASIC PAY -->
+<div class="row mt-2">
+
+    <!-- PF NO -->
+    <div class="col-md-4">
+        <label>PF No</label>
+        <input type="text"
+       id="pf_no"
+       name="pf_no"
+       class="form-control"
+       required>
+    </div>
+
+    <!-- UAN NO -->
+    <div class="col-md-4">
+        <label>UAN No</label>
+        <input type="text"
+       id="uan_no"
+       name="uan_no"
+       class="form-control"
+       required>
+    </div>
+
+    <!-- ACTUAL BASIC PAY -->
+    <div class="col-md-4">
+        <label>Actual Basic Pay</label>
+        <input type="number"
+               id="actual_basic_pay"
+               name="actual_basic_pay"
+               class="form-control"
+               step="0.01">
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<hr>
+
+<h5 class="blue-heading">
+EARNINGS
+</h5>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Particulars</th>
+<th>Current Amount</th>
+<th>YTD</th>
+
+</tr>
+
+
+<tr>
+
+<td>Basic Pay</td>
+
+<td>
+
+<input
+id="basic"
+name="basic"
+value="0"
+class="form-control"
+inputmode="decimal"
+pattern="^\d+(\.\d{1,2})?$"
+oninput="
+this.value=this.value
+.replace(/[^0-9.]/g,'')
+.replace(/^\./,'')
+.replace(/(\..*)\./g,'$1');
+">
+
+</td>
+
+<td>
+
+<input
+id="basic_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>HRA</td>
+
+<td>
+
+<input
+id="hra"
+readonly
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+id="hra_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Meal Coupon</td>
+
+<td>
+
+<input
+id="meal"
+name="meal"
+value="0"
+class="form-control"
+inputmode="decimal"
+pattern="^\d+(\.\d{1,2})?$"
+oninput="
+this.value=this.value
+.replace(/[^0-9.]/g,'')
+.replace(/^\./,'')
+.replace(/(\..*)\./g,'$1');
+">
+
+</td>
+
+<td>
+
+<input
+id="meal_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Transport Allowance</td>
+
+<td>
+
+<input
+id="transport"
+name="transport"
+value="0"
+class="form-control"
+inputmode="decimal"
+pattern="^\d+(\.\d{1,2})?$"
+oninput="
+this.value=this.value
+.replace(/[^0-9.]/g,'')
+.replace(/^\./,'')
+.replace(/(\..*)\./g,'$1');
+">
+
+</td>
+
+<td>
+
+<input
+id="transport_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td><b>Total Earnings</b></td>
+
+<td>
+
+<input
+id="total_earnings"
+readonly
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+id="total_earnings_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+</table>
+
+
+
+<hr>
+
+<h5 class="blue-heading">
+TAXES
+</h5>
+
+<table class="table table-bordered">
+
+<tr>
+
+<td>Income Tax</td>
+
+<td>
+
+<input
+id="income_tax"
+readonly
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+id="income_tax_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td><b>Total Taxes</b></td>
+
+<td>
+
+<input
+id="total_tax"
+readonly
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+id="total_tax_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+</table>
+
+
+
+<hr>
+
+<h5 class="blue-heading">
+DEDUCTIONS
+</h5>
+
+<table class="table table-bordered">
+
+<tr>
+
+<td>PF Contribution</td>
+
+<td>
+
+<input
+id="pf"
+readonly
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+id="pf_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Prof Tax</td>
+
+<td>
+<input
+id="prof_tax"
+name="prof_tax"
+value="0"
+class="form-control"
+inputmode="decimal"
+pattern="^\d+(\.\d{1,2})?$"
+oninput="
+this.value=this.value
+.replace(/[^0-9.]/g,'')
+.replace(/^\./,'')
+.replace(/(\..*)\./g,'$1');
+">
+</td>
+
+<td>
+
+<input
+id="prof_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Insurance</td>
+
+<td>
+
+<!-- Insurance -->
+<input
+id="insurance"
+name="insurance"
+value="0"
+class="form-control"
+inputmode="decimal"
+pattern="^\d+(\.\d{1,2})?$"
+oninput="
+this.value=this.value
+.replace(/[^0-9.]/g,'')
+.replace(/^\./,'')
+.replace(/(\..*)\./g,'$1');
+">
+
+</td>
+
+<td>
+
+<input
+id="insurance_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Sodexo</td>
+
+<td>
+
+<input
+id="sodexo"
+name="sodexo"
+value="0"
+class="form-control"
+readonly>
+</td>
+
+<td>
+
+<input
+id="sodexo_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td><b>Total Deductions</b></td>
+
+<td>
+
+<input
+id="total_deductions"
+readonly
+class="form-control">
+
+</td>
+
+<td>
+
+<input
+id="total_deductions_ytd"
+readonly
+class="form-control">
+
+</td>
+
+</tr>
+
+</table>
+
+
+<hr>
+
+<h5 class="blue-heading">
+FORMULA
+</h5>
+
+<div class="formula">
+
+NET PAY =
+TOTAL EARNINGS −
+TOTAL TAXES −
+TOTAL DEDUCTIONS
+
+</div>
+<hr>
+
+<hr>
+
+<h5 class="blue-heading">
+NET PAY DETAILS
+</h5>
+
+<div class="row mt-3">
+
+    <div class="col-md-3">
+        <label>Net Pay</label>
+        <input
+        id="net_pay"
+        readonly
+        class="form-control fw-bold">
+    </div>
+
+    <div class="col-md-3">
+        <label>Total Earnings</label>
+        <input
+        id="net_total_earnings"
+        readonly
+        class="form-control">
+    </div>
+
+    <div class="col-md-3">
+        <label>Total Tax</label>
+        <input
+        id="net_total_tax"
+        readonly
+        class="form-control">
+    </div>
+
+    <div class="col-md-3">
+        <label>Total Deductions</label>
+        <input
+        id="net_total_deductions"
+        readonly
+        class="form-control">
+    </div>
+
+</div>
+
+<hr>
+
+
+</div>
+
+<hr>
+<hr>
+
+
+<hr>
+
+<h5 class="blue-heading">
+DIRECT DEPOSIT INFORMATION
+</h5>
+
+<div class="row mt-3">
+
+    <!-- Bank Name -->
+
+    <div class="col-md-6">
+
+        <label>Bank Name</label>
+
+        <select
+        name="bank"
+        id="bank"
+        class="form-control"
+        required>
+
+            <option value="" selected disabled>
+            Select Bank Name
+            </option>
+
+            <option>SBI</option>
+            <option>ICICI</option>
+            <option>HDFC</option>
+            <option>KOTAK</option>
+            <option>ANDHRA</option>
+            <option>AXIS</option>
+            <option>CANARA</option>
+            <option>UNION BANK</option>
+            <option>BANK OF BARODA</option>
+            <option>PUNJAB NATIONAL BANK</option>
+
+        </select>
+
+    </div>
+
+
+    <!-- Bank Account -->
+
+    <div class="col-md-6">
+
+        <label>Bank Account</label>
+
+        <input
+        type="text"
+        id="bank_account"
+        name="bank_account"
+        class="form-control">
+
+    </div>
+
+</div>
+
+
+<div class="text-center mt-4">
+
+<div class="text-center mt-4 d-flex justify-content-center gap-3">
+
+<!-- PREVIEW -->
+
+<button
+type="submit"
+class="btn btn-success px-5">
+
+Preview
+
+</button>
+
+
+<!-- CLEAR -->
+
+<button
+type="reset"
+class="btn btn-danger px-5">
+
+Clear
+
+</button>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+<a
+href="/history"
+class="btn btn-dark px-5">
+
+View History
+
+</a>
+
+</div>
+
+</div>
+
+</form>
+
+</div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>
