@@ -2,7 +2,7 @@
 // ADMIN LOGIN SYSTEM
 // ================================
 
-function login() {
+function login(){
 
 let adminId =
 document.getElementById("admin_id").value.trim();
@@ -13,37 +13,35 @@ document.getElementById("password").value.trim();
 let error =
 document.getElementById("error");
 
-error.innerText = "";
+error.innerText="";
 
-if (adminId === "" || password === "") {
+if(adminId==="" || password===""){
 
-error.innerText =
+error.innerText=
 "Please enter Admin ID and Password";
 
-return false;
+return;
 }
 
-if (
-adminId === "admin" &&
-password === "12345"
-) {
+if(
+adminId==="admin" &&
+password==="12345"
+){
 
-window.location.assign("index.html");
+window.location.href="index.html";
 
-return false;
+}
+else{
 
-} else {
-
-error.innerText =
+error.innerText=
 "Invalid Admin ID or Password";
 
-return false;
 }
 
 }
 
 
-// ENTER KEY
+// ENTER KEY LOGIN
 
 document.addEventListener(
 "keydown",
@@ -66,8 +64,8 @@ login();
 function forgotPassword(){
 
 alert(
-"Admin Login Details\n\n" +
-"Admin ID : admin\n" +
+"Admin Login Details\n\n"+
+"Admin ID : admin\n"+
 "Password : 12345"
 );
 
