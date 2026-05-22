@@ -4,43 +4,16 @@
 
 function login(){
 
-let username =
-document.getElementById("username").value;
+let adminId =
+document.getElementById("admin_id").value;
 
 let password =
 document.getElementById("password").value;
 
-if(username==="admin" && password==="1234"){
-
-window.location.href="index.html";
-
-}
-else{
-
-alert("Invalid Username or Password");
-
-}
-
-}
-
-
-// ================================
-// ADMIN CREDENTIALS
-// ================================
-
-let correctId =
-"admin";
-
-let correctPassword =
-"12345";
-
-
-// Clear old error
+let error =
+document.getElementById("error");
 
 error.innerText="";
-
-
-// Empty field validation
 
 if(
 adminId==="" ||
@@ -54,23 +27,14 @@ return;
 
 }
 
-
-// Login validation
-
 if(
-
-adminId===correctId &&
-password===correctPassword
-
+adminId==="admin" &&
+password==="12345"
 ){
 
-// Open payslip page
-
-window.location.href=
-"./payslip";
+window.location.href="./payslip.html";
 
 }
-
 else{
 
 error.innerText=
@@ -81,7 +45,6 @@ error.innerText=
 }
 
 
-
 // ================================
 // ENTER KEY LOGIN
 // ================================
@@ -90,9 +53,7 @@ document.addEventListener(
 "keypress",
 function(event){
 
-if(
-event.key==="Enter"
-){
+if(event.key==="Enter"){
 
 login();
 
@@ -102,7 +63,6 @@ login();
 );
 
 
-
 // ================================
 // FORGOT PASSWORD
 // ================================
@@ -110,11 +70,9 @@ login();
 function forgotPassword(){
 
 alert(
-
 "Admin Login Details\n\n"+
 "Admin ID : admin\n"+
 "Password : 12345"
-
 );
 
 }
