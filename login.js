@@ -28,7 +28,13 @@ adminId==="admin" &&
 password==="12345"
 ){
 
-window.location.href="index.html";
+sessionStorage.setItem(
+"loggedIn",
+"true"
+);
+
+window.location.href=
+"index.html";
 
 }
 else{
