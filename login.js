@@ -4,20 +4,24 @@
 
 function login(){
 
-let adminId =
-document.getElementById(
-"admin_id"
-).value.trim();
+let username =
+document.getElementById("username").value;
 
 let password =
-document.getElementById(
-"password"
-).value.trim();
+document.getElementById("password").value;
 
-let error =
-document.getElementById(
-"error"
-);
+if(username==="admin" && password==="1234"){
+
+window.location.href="index.html";
+
+}
+else{
+
+alert("Invalid Username or Password");
+
+}
+
+}
 
 
 // ================================
