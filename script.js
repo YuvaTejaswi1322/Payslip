@@ -45,7 +45,8 @@ document.getElementById("leaves");
 const name=document.getElementById("name");
 const department=document.getElementById("department");
 const designation=document.getElementById("designation");
-const emp_no=document.getElementById("emp_no");
+const pers_no=
+document.getElementById("pers_no");
 const pan=document.getElementById("pan");
 const pf_no=document.getElementById("pf_no");
 const uan_no=document.getElementById("uan_no");
