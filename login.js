@@ -29,7 +29,7 @@ adminId==="admin" &&
 password==="12345"
 ){
 
-window.location.href="./index.html";
+window.location.href="index.html";
 
 }
 else{
