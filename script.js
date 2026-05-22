@@ -702,3 +702,13 @@ field.tabIndex=-1;
 calculateSalary();
 
 });
+function logout(){
+
+sessionStorage.removeItem(
+"loggedIn"
+);
+
+window.location.href=
+"login.html";
+
+}
